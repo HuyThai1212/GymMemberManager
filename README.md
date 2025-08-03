@@ -9,7 +9,7 @@ Các chức năng chính:
 - Quản lý gói tập (Membership Package) và gói huấn luyện viên (Personal Trainer Package)
 
 ##  Công nghệ sử dụng
-- .NET 6 / .NET Core
+- .NET 8 / .NET Core
 - WPF (XAML UI)
 - Entity Framework Core
 - SQL Server
