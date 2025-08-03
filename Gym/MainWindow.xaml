@@ -1,0 +1,94 @@
+﻿<Window x:Class="Gym.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gym"
+        mc:Ignorable="d"
+        Title="Gym List" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="White" Padding="15" CornerRadius="10" Margin="0,0,0,15" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Text="🔍 Tìm theo tên" FontWeight="Bold" />
+                    <TextBox x:Name="txtSearch" Width="180" Height="30" 
+                             Margin="0,5,0,0"
+                             Background="#F0F0F0" BorderThickness="0" Padding="5" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Text="🏋️ Gói tập" FontWeight="Bold" />
+                    <ComboBox x:Name="cmbMembership" Width="160" Height="30"
+                              Margin="0,5,0,0"
+                              Background="#F0F0F0" BorderThickness="0"
+                              DisplayMemberPath="PackageName" SelectedValuePath="PackageId"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="💪 Gói PT" FontWeight="Bold" />
+                    <ComboBox x:Name="cmbPT" Width="160" Height="30"
+                              Margin="0,5,0,0"
+                              Background="#F0F0F0" BorderThickness="0"
+                              DisplayMemberPath="Ptname" SelectedValuePath="PtpackageId"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Lọc" Width="65" Height="30" Margin="0,0,0,0"
+                            Click="Filter_Click"
+                            Background="#007ACC" Foreground="White" BorderThickness="0"
+                            Cursor="Hand" />
+                    <Button Content="Thêm mới" Width="65" Height="30"
+                            Click="Add_Click"
+                            Background="#2E8B57" Foreground="White" BorderThickness="0"
+                            Cursor="Hand"/>
+                </StackPanel>
+                <Button Content="Logout" Width="65" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,0,0" 
+                        Background="#FF6347" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="Logout_Click"/>
+            </StackPanel>
+        </Border>
+
+        <DataGrid x:Name="dgMembers"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  HeadersVisibility="Column"
+                  RowHeaderWidth="0"
+                  SelectionChanged="dgMembers_SelectionChanged"
+                  Margin="0"
+                  GridLinesVisibility="Horizontal"
+                  Background="White"
+                  BorderThickness="0"
+                  HorizontalGridLinesBrush="#DDD">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="👤 Họ tên" Binding="{Binding FullName}" Width="105"/>
+                <DataGridTextColumn Header="Giới tính" Binding="{Binding Gender}" Width="55"/>
+                <DataGridTextColumn Header="Ngày sinh" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Width="70"/>
+                <DataGridTextColumn Header="SĐT" Binding="{Binding PhoneNumber}" Width="79"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="100"/>
+                <DataGridTextColumn Header="Ngày vào" Binding="{Binding JoinDate, StringFormat=dd/MM/yyyy}" Width="70"/>
+                <DataGridTextColumn Header="Gói tập" Binding="{Binding MembershipPackageName}" Width="70"/>
+                <DataGridTextColumn Header="Gói PT" Binding="{Binding PersonalTrainerPackageName}" Width="130"/>
+
+                <DataGridTemplateColumn Header="⚙️" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="Sửa" Width="30" Margin="2,0" Click="Edit_Click"
+                                        Background="#4CAF50" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                                <Button Content="Xoá" Width="30" Margin="2,0" Click="Delete_Click"
+                                        Background="#D9534F" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
